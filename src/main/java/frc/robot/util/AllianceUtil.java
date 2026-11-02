@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import frc.robot.FieldConstants;
 
-/** Alliance-related helpers used across the robot (drive, shooter, etc.). */
+/** Alliance-related helpers. */
 public final class AllianceUtil {
 
   private AllianceUtil() {}
@@ -27,7 +27,7 @@ public final class AllianceUtil {
     return isInAllianceZone(robotXM, isRedAlliance());
   } // End isInAllianceZone
 
-  /** Same as {@link #isInAllianceZone(double)} but with an explicit alliance (e.g. second sim robot). */
+  /** Same as {@link #isInAllianceZone(double)} for an explicit alliance. */
   public static boolean isInAllianceZone(double robotXM, boolean redAlliance) {
     return redAlliance
         ? robotXM >= FieldConstants.FIELD_LENGTH_M - FieldConstants.ALLIANCE_ZONE_M

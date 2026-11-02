@@ -3,23 +3,9 @@
   "robotLength": 0.8128,
   "holonomicMode": true,
   "pathFolders": [
-    "Depot",
-    "Fuel Sweeps",
-    "Hanging",
-    "Sim Robot Pathings",
-    "Outpost",
-    "Shooting Positions",
-    "Simple Shooting",
     "Starting Positions"
   ],
-  "autoFolders": [
-    "Depot",
-    "Hanging",
-    "Left Fuel Sweeps",
-    "Simple Shooting",
-    "Outpost",
-    "Right Fuel Sweeps"
-  ],
+  "autoFolders": [],
   "defaultMaxVel": 3.0,
   "defaultMaxAccel": 2.0,
   "defaultMaxAngVel": 540.0,

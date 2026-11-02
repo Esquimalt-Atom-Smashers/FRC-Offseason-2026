@@ -525,15 +525,15 @@ public class FuelSim {
     private static final double kCarriedFuelBackXRobotMeters = -0.10;
     /** Robot-frame Y center for carried-fuel visualization stack. */
     private static final double kCarriedFuelCenterYRobotMeters = 0.00;
-    /** Robot-frame spacing between carried-fuel visuals for primary and second-sim (ball diameter, no gap). */
+    /** Robot-frame spacing between carried-fuel visuals (ball diameter, no gap). */
     private static final double kCarriedFuelSpacingRobotMeters = FUEL_RADIUS * 2.0;
     /** Base Z height used to render carried fuel as "inside" the robot. */
     private static final double kCarriedFuelBaseHeightMeters = 0.15;
-    /** Default back-to-front slots per column for carried-fuel visualization (primary / second sim). */
+    /** Default back-to-front slots per column for carried-fuel visualization. */
     public static final int kCarriedFuelRowsBackToFrontDefault = 3;
     /** Back-to-front slots for full-field sim extra robots (wider stack in robot X). */
     public static final int kCarriedFuelRowsBackToFrontSimExtra = 4;
-    /** Max carried fuel for primary and second-sim (matches {@link frc.robot.subsystems.shooter.ShooterSim} capacity). */
+    /** Max carried fuel visualized on the simulated robot. */
     private static final int kCarriedFuelMaxCarriedDefault = 30;
     /** Max carried fuel for full-field sim extra robots. */
     public static final int kCarriedFuelMaxCarriedSimExtra = 80;
@@ -1052,14 +1052,14 @@ public class FuelSim {
 
     /**
      * Spawns a fuel onto the field with a specified launch velocity and angles, accounting for robot movement.
-     * Launch position is robot pose + robotToLaunchPoint (e.g. robotToTurret so trajectory starts at Turret).
+     * Launch position is the robot pose plus {@code robotToLaunchPoint}.
      *
      * @param launchVelocity Initial launch velocity
      * @param hoodAngle Hood angle where 0 is launching horizontally and 90 degrees is launching straight up
      * @param turretYaw Aim direction in <i>robot frame</i> (0 = robot +X forward), added to the robot's field heading for
      *     horizontal velocity. Do not use the composed launch-pose yaw (e.g. after {@code robotToLaunchPoint} with a fixed
      *     twist); that would double-count mount offsets.
-     * @param robotToLaunchPoint Transform from robot center to launch point (e.g. Turret pivot); used for launch position only
+     * @param robotToLaunchPoint Transform from robot center to the launch point; used for launch position only
      * @throws IllegalStateException if robot is not registered
      */
     public void launchFuel(
@@ -1115,7 +1115,7 @@ public class FuelSim {
 
     /**
      * Spawns a fuel using only a height offset from robot center (legacy). Prefer
-     * {@link #launchFuel(LinearVelocity, Angle, Angle, Transform3d)} with robotToTurret so the trajectory starts at the Turret.
+     * {@link #launchFuel(LinearVelocity, Angle, Angle, Transform3d)} so the trajectory starts at the launch point.
      */
     public void launchFuel(LinearVelocity launchVelocity, Angle hoodAngle, Angle turretYaw, Distance launchHeight) {
         launchFuel(

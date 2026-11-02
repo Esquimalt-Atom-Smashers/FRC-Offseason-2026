@@ -16,7 +16,7 @@ public final class SimMatchTimeCache {
         return remainingSec;
     } // End getRemainingSec
 
-    /** Called from the robot loop when the sim match clock value changes. */
+    /** Stores the latest remaining match seconds, or {@code -1} when the clock is not running. */
     public static void setRemainingSec(double seconds) {
         remainingSec = seconds;
     } // End setRemainingSec

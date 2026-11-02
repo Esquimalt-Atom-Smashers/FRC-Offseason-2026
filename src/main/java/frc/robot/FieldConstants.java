@@ -18,19 +18,19 @@ public final class FieldConstants {
   /** Hub light height above floor. */
   public static final double HUB_LIGHT_HEIGHT_M = 1.275;
 
-  /** Blue alliance hub center in 3D (x, y, z) meters for shooter ballistics. */
+  /** Blue alliance hub center in 3D (x, y, z) meters. */
   public static final Translation3d BLUE_HUB_CENTER_3D =
       new Translation3d(BLUE_HUB_CENTER.getX(), BLUE_HUB_CENTER.getY(), HUB_CENTER_HEIGHT_M);
 
-  /** Red alliance hub center in 3D (x, y, z) meters for shooter ballistics. */
+  /** Red alliance hub center in 3D (x, y, z) meters. */
   public static final Translation3d RED_HUB_CENTER_3D =
       new Translation3d(RED_HUB_CENTER.getX(), RED_HUB_CENTER.getY(), HUB_CENTER_HEIGHT_M);
 
-  /** Blue alliance hub light in 3D (x, y, z) meters for shooter ballistics. */
+  /** Blue alliance hub light in 3D (x, y, z) meters. */
   public static final Translation3d BLUE_HUB_LIGHT_3D =
       new Translation3d(BLUE_HUB_CENTER.getX(), BLUE_HUB_CENTER.getY(), HUB_LIGHT_HEIGHT_M);
 
-  /** Red alliance hub light in 3D (x, y, z) meters for shooter ballistics. */
+  /** Red alliance hub light in 3D (x, y, z) meters. */
   public static final Translation3d RED_HUB_LIGHT_3D =
       new Translation3d(RED_HUB_CENTER.getX(), RED_HUB_CENTER.getY(), HUB_LIGHT_HEIGHT_M);
 
@@ -43,11 +43,11 @@ public final class FieldConstants {
   /** Funnel top height above floor. */
   public static final double FUNNEL_TOP_HEIGHT_M = HUB_CENTER_HEIGHT_M + FUNNEL_HEIGHT_M;
 
-  /** Blue alliance funnel top center in 3D (x, y, z) for shooter ballistics. */
+  /** Blue alliance funnel top center in 3D (x, y, z) meters. */
   public static final Translation3d BLUE_FUNNEL_TOP_CENTER_3D =
       new Translation3d(BLUE_HUB_CENTER.getX(), BLUE_HUB_CENTER.getY(), FUNNEL_TOP_HEIGHT_M);
 
-  /** Red alliance funnel top center in 3D (x, y, z) for shooter ballistics. */
+  /** Red alliance funnel top center in 3D (x, y, z) meters. */
   public static final Translation3d RED_FUNNEL_TOP_CENTER_3D =
       new Translation3d(RED_HUB_CENTER.getX(), RED_HUB_CENTER.getY(), FUNNEL_TOP_HEIGHT_M);
 

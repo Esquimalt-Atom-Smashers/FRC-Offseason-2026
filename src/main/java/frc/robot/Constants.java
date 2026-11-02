@@ -30,27 +30,15 @@ public final class Constants {
 
     public static final Distance FULL_LENGTH = FRAME_SIZE_X.plus(BUMPER_THICKNESS.times(2));
     public static final Distance FULL_WIDTH = FRAME_SIZE_Y.plus(BUMPER_THICKNESS.times(2));
-    
-    public static final double FRONT_EXTENSION = 0.2794; // Metres added to robot when extender is out
-    /**
-     * Protrusion past bumpers along robot +X when the extender is fully extended. MapleSim / dyn4j
-     * chassis collision only; FuelSim uses {@link #FULL_LENGTH} for the robot box.
-     */
-    public static final double kExtensionPastBumpersMeters = Inches.of(8.696850).in(Meters);
+
+    /** Extra length (m) added in front of the robot during trench-zone prediction. */
+    public static final double FRONT_EXTENSION = 0.2794;
   }
 
   /** Controller deadband and rumble. */
   public static class ControllerConstants {
     public static final double CONTROLLER_DEADBAND = 0.15;
     public static final double CONTROLLER_RUMBLE = 0.3;
-  }
-
-  /** Match timing. */
-  public static class MatchTiming {
-    private MatchTiming() {}
-
-    /** Driver hang endgame period. */
-    public static final double HANG_DRIVER_ENDGAME_SECONDS = 30.0;
   }
 
   /** Teleop drive speeds and trench/bump alignment. */

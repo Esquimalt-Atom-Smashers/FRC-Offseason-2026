@@ -7,9 +7,6 @@
 
 package frc.robot.util;
 
-import static edu.wpi.first.units.Units.Seconds;
-import static frc.robot.subsystems.shooter.ShooterConstants.kActivePreshootTime;
-
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Timer;
@@ -36,7 +33,8 @@ public class HubShiftUtil {
     private static final double[] shiftStartTimes = {0.0, 10.0, 35.0, 60.0, 85.0, 110.0};
     private static final double[] shiftEndTimes = {10.0, 35.0, 60.0, 85.0, 110.0, 140.0};
 
-    private static final double approachingActiveFudge = -kActivePreshootTime.in(Seconds);
+    /** Seconds added to an approaching-active shift boundary. Negative, so the active window starts early. */
+    private static final double approachingActiveFudge = -2.0;
 
     public static final double autoEndTime = 20.0;
     public static final double teleopDuration = 140.0;
