@@ -1,0 +1,336 @@
+{
+  "hubs": [
+    {
+      "x": -8,
+      "y": -8,
+      "width": 2576,
+      "height": 1048,
+      "state": {
+        "sidebar": {
+          "width": 459,
+          "expanded": [
+            "/AdvantageKit/RealOutputs/IntakeVisualizer/LeftMechanism/dims",
+            "/AdvantageKit/RealOutputs/IntakeVisualizer/LeftMechanism/Intake/Measured Left",
+            "/AdvantageKit/RealOutputs/IntakeVisualizer/LeftMechanism/Intake/Measured Left/Intake",
+            "/AdvantageKit/RealOutputs/IntakeVisualizer/LeftMechanism/Intake/Measured Left/Intake/Measured Left Intake",
+            "/AdvantageKit/RealOutputs/IntakeVisualizer/Mechanism/Setpoint Left",
+            "/AdvantageKit/RealOutputs/IntakeVisualizer/Mechanism/Measured Left",
+            "/AdvantageKit/RealOutputs/IntakeVisualizer/Mechanism/Measured Left/Left Intake",
+            "/AdvantageKit/RealOutputs/IntakeVisualizer/Mechanism/Setpoint Left/Left Intake",
+            "/Tuning/Turret",
+            "/AdvantageKit/RealOutputs",
+            "/AdvantageKit/Turret",
+            "/AdvantageKit/RealOutputs/Turret/TurnController/Setpoint",
+            "/AdvantageKit/RealOutputs/Mechanism3d",
+            "/Tuning/Turret/Flywheel",
+            "/AdvantageKit",
+            "/AdvantageKit/RealOutputs/Intake",
+            "/Vision/Camera0",
+            "/RealOutputs/ShooterVisualizer/HoodPose/rotation",
+            "/RealOutputs/ShooterVisualizer/TurretPose",
+            "/RealOutputs/Subsystems/Shooter/Hood/Inputs",
+            "/RealOutputs/Subsystems/Shooter/Flywheel/Inputs",
+            "/RealOutputs/Shooter/Ready",
+            "/RealOutputs/Vision/Camera0",
+            "/SmartDashboard",
+            "/SmartDashboard/Flywheel",
+            "/RealOutputs/Vision/Summary",
+            "/RealOutputs/Vision/Camera1",
+            "/RealOutputs/Subsystems/Shooter/Turret/Inputs",
+            "/RealOutputs/Subsystems/Extender/Inputs",
+            "/RealOutputs/Subsystems/Shooter/Flywheel",
+            "/RealOutputs/Subsystems/Hang/Inputs",
+            "/Drive/Module0",
+            "/RealOutputs/Subsystems/Drive",
+            "/RealOutputs/Subsystems/Drive/Sim",
+            "/RealOutputs/Subsystems/Drive/Sim/DriveSpeedMultipliers",
+            "/RealOutputs",
+            "/SmartDashboard/SimStartingPoses",
+            "/SecondSimRobotOutputs/Drive",
+            "/RealOutputs/SecondSimRobotOutputs",
+            "/RealOutputs/SecondSimRobotOutputs/FieldSimulation",
+            "/RealOutputs/SecondSimRobotOutputs/FieldSimulation/RobotPosition",
+            "/RealOutputs/Odometry",
+            "/RealOutputs/SecondSimRobotOutputs/ComponentPoses",
+            "/RealOutputs/SimFullFieldExtra",
+            "/RealOutputs/SimFullFieldExtra/5",
+            "/RealOutputs/SimFullFieldExtra/4",
+            "/RealOutputs/SimFullFieldExtra/6",
+            "/RealOutputs/SimFullFieldExtra/3",
+            "/RealOutputs/SimFullFieldExtra/6/TrenchCycle"
+          ]
+        },
+        "tabs": {
+          "selected": 1,
+          "tabs": [
+            {
+              "type": 0,
+              "title": "",
+              "controller": null,
+              "controllerUUID": "yhpnmioudo41w2ts3yi1iaf5y3pmnjdb",
+              "renderer": "",
+              "controlsHeight": 0
+            },
+            {
+              "type": 3,
+              "title": "3D Field - Sim Robot",
+              "controller": {
+                "sources": [
+                  {
+                    "type": "trajectory",
+                    "logKey": "/RealOutputs/ShooterVisualizer/Trajectory",
+                    "logType": "Translation3d[]",
+                    "visible": false,
+                    "options": {
+                      "color": "#00ff00",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "gamePiece",
+                    "logKey": "/RealOutputs/FieldSimulation/Fuels",
+                    "logType": "Translation3d[]",
+                    "visible": true,
+                    "options": {
+                      "variant": "Fuel"
+                    }
+                  },
+                  {
+                    "type": "gamePiece",
+                    "logKey": "/RealOutputs/ShooterVisualizer/GhostFuel",
+                    "logType": "Pose3d[]",
+                    "visible": true,
+                    "options": {
+                      "variant": "Fuel"
+                    }
+                  },
+                  {
+                    "type": "robot",
+                    "logKey": "/RealOutputs/FieldSimulation/RobotPosition",
+                    "logType": "Pose2d",
+                    "visible": true,
+                    "options": {
+                      "model": "Beta (Blue)"
+                    }
+                  },
+                  {
+                    "type": "component",
+                    "logKey": "/RealOutputs/ComponentPoses/Final",
+                    "logType": "Pose3d[]",
+                    "visible": true,
+                    "options": {}
+                  },
+                  {
+                    "type": "robot",
+                    "logKey": "/RealOutputs//SecondSimRobotOutputs/FieldSimulation/RobotPosition-Blue",
+                    "logType": "Pose2d",
+                    "visible": true,
+                    "options": {
+                      "model": "Beta (Blue)"
+                    }
+                  },
+                  {
+                    "type": "component",
+                    "logKey": "/RealOutputs//SecondSimRobotOutputs/ComponentPoses/Final",
+                    "logType": "Pose3d[]",
+                    "visible": true,
+                    "options": {}
+                  },
+                  {
+                    "type": "robot",
+                    "logKey": "/RealOutputs//SecondSimRobotOutputs/FieldSimulation/RobotPosition-Red",
+                    "logType": "Pose2d",
+                    "visible": true,
+                    "options": {
+                      "model": "Beta (Red)"
+                    }
+                  },
+                  {
+                    "type": "component",
+                    "logKey": "/RealOutputs//SecondSimRobotOutputs/ComponentPoses/Final",
+                    "logType": "Pose3d[]",
+                    "visible": true,
+                    "options": {}
+                  },
+                  {
+                    "type": "robot",
+                    "logKey": "/RealOutputs/FieldSimulation/RobotPosition-Blue-2",
+                    "logType": "Pose2d",
+                    "visible": true,
+                    "options": {
+                      "model": "2026 KitBot"
+                    }
+                  },
+                  {
+                    "type": "robot",
+                    "logKey": "/RealOutputs/FieldSimulation/RobotPosition-Blue-3",
+                    "logType": "Pose2d",
+                    "visible": true,
+                    "options": {
+                      "model": "2026 KitBot"
+                    }
+                  },
+                  {
+                    "type": "robot",
+                    "logKey": "/RealOutputs/FieldSimulation/RobotPosition-Red-1",
+                    "logType": "Pose2d",
+                    "visible": true,
+                    "options": {
+                      "model": "Kitbot (Red)"
+                    }
+                  },
+                  {
+                    "type": "robot",
+                    "logKey": "/RealOutputs/FieldSimulation/RobotPosition-Red-2",
+                    "logType": "Pose2d",
+                    "visible": true,
+                    "options": {
+                      "model": "Kitbot (Red)"
+                    }
+                  },
+                  {
+                    "type": "robot",
+                    "logKey": "/RealOutputs/FieldSimulation/RobotPosition-Red-3",
+                    "logType": "Pose2d",
+                    "visible": true,
+                    "options": {
+                      "model": "Kitbot (Red)"
+                    }
+                  },
+                  {
+                    "type": "robot",
+                    "logKey": "/RealOutputs/FieldSimulation/HubLight-Blue",
+                    "logType": "Pose3d",
+                    "visible": true,
+                    "options": {
+                      "model": "Hub (Blue)"
+                    }
+                  },
+                  {
+                    "type": "robot",
+                    "logKey": "/RealOutputs/FieldSimulation/HubLight-Red",
+                    "logType": "Pose3d",
+                    "visible": true,
+                    "options": {
+                      "model": "Hub (Red)"
+                    }
+                  }
+                ],
+                "game": "FRC:2026 Field"
+              },
+              "controllerUUID": "gw72q771q1z0rcymjrwghy59zdmgcphl",
+              "renderer": {
+                "cameraIndex": -1,
+                "orbitFov": 50,
+                "cameraPosition": [
+                  -10.912885836904987,
+                  6.165216237503892,
+                  -0.7086896882598882
+                ],
+                "cameraTarget": [
+                  1.2307195584804742,
+                  -1.0838707225747084,
+                  -1.3266916630366767
+                ]
+              },
+              "controlsHeight": 370
+            },
+            {
+              "type": 3,
+              "title": "3D Field - For Real Odom Testing",
+              "controller": {
+                "sources": [
+                  {
+                    "type": "robot",
+                    "logKey": "/RealOutputs/Odometry/Robot",
+                    "logType": "Pose2d",
+                    "visible": true,
+                    "options": {
+                      "model": "Beta (Blue)"
+                    }
+                  },
+                  {
+                    "type": "component",
+                    "logKey": "/RealOutputs/ComponentPoses/Final",
+                    "logType": "Pose3d[]",
+                    "visible": true,
+                    "options": {}
+                  },
+                  {
+                    "type": "ghost",
+                    "logKey": "/RealOutputs/Vision/Camera0/RobotPosesAccepted",
+                    "logType": "Pose3d[]",
+                    "visible": true,
+                    "options": {
+                      "model": "Beta (Blue)",
+                      "color": "#00ff00"
+                    }
+                  },
+                  {
+                    "type": "vision",
+                    "logKey": "/RealOutputs/Vision/Camera0/TagPoses",
+                    "logType": "Pose3d[]",
+                    "visible": true,
+                    "options": {
+                      "color": "#ff8c00",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "vision",
+                    "logKey": "/RealOutputs/Vision/Camera1/TagPoses",
+                    "logType": "Pose3d[]",
+                    "visible": true,
+                    "options": {
+                      "color": "#ffff00",
+                      "size": "normal"
+                    }
+                  },
+                  {
+                    "type": "cone",
+                    "logKey": "/RealOutputs/Vision/Camera0/CameraPose",
+                    "logType": "Pose3d[]",
+                    "visible": true,
+                    "options": {
+                      "color": "#ff8c00",
+                      "position": "center"
+                    }
+                  },
+                  {
+                    "type": "cone",
+                    "logKey": "/RealOutputs/Vision/Camera1/CameraPose",
+                    "logType": "Pose3d[]",
+                    "visible": true,
+                    "options": {
+                      "color": "#ffff00",
+                      "position": "center"
+                    }
+                  }
+                ],
+                "game": "FRC:2026 Field"
+              },
+              "controllerUUID": "lus3697hz3si63uudbee3n763wu1vyat",
+              "renderer": {
+                "cameraIndex": -1,
+                "orbitFov": 50,
+                "cameraPosition": [
+                  -8.51190223579238,
+                  4.969149458226765,
+                  -4.16138857518297
+                ],
+                "cameraTarget": [
+                  2.6221527830885334,
+                  -1.2673091438604127,
+                  0.4800666429946327
+                ]
+              },
+              "controlsHeight": 306
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "satellites": [],
+  "version": "26.0.0"
+}
