@@ -7,7 +7,8 @@ public class Intake extends SubsystemBase {
   public enum State {
     INTAKING,
     OUTTAKING,
-    IDLE
+    IDLE,
+    MANUAL
   }
 
   private State state = State.IDLE;
