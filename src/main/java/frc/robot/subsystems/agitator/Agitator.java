@@ -5,12 +5,14 @@ import static frc.robot.subsystems.agitator.AgitatorConstants.*;
 import frc.robot.Constants;
 import java.util.function.BooleanSupplier;
 
+
 import frc.robot.util.TelemetryUtil;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.math.MathUtil;
 import frc.robot.Constants;
+import org.littletonrobotics.junction.Logger;
 
 
  public class Agitator extends SubsystemBase{
@@ -43,6 +45,8 @@ import frc.robot.Constants;
 
   public void periodic() {
   agitatorIO.updateInputs(agitatorInputs);
+  
+ 
   if (DriverStation.isDisabled()) {
     agitatorIO.stop();
   }
