@@ -10,6 +10,7 @@ import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
+import edu.wpi.first.math.MathUtil;
 import frc.robot.Constants;
 
 public class IntakeIOSparkMax implements IntakeIO {
@@ -43,8 +44,11 @@ public class IntakeIOSparkMax implements IntakeIO {
   } // End updateInputs
 
   @Override
-  public void setVoltage(double volts) {
-    motor.set(volts);
+  public void setVoltage(double volts, boolean ignoreLimits) {
+    double clamped = ignoreLimits
+      ? MathUtil.clamp(volts, -Constants.kNominalVoltage, Constants.kNominalVoltage)
+      : MathUtil.clamp(volts, kMinVoltage, kMaxVoltage); 
+    motor.set(clamped);
   } // end setVoltage
 
   @Override

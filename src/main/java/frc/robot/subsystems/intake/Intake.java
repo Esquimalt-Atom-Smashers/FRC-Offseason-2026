@@ -53,7 +53,7 @@ public class Intake extends SubsystemBase {
       case INTAKING:
       case OUTTAKING:
       case MANUAL:
-        intakeIO.setVoltage(targetVoltage);
+        intakeIO.setVoltage(targetVoltage, false);
         break;
       default:
         intakeIO.stop();

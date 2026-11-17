@@ -10,7 +10,7 @@ public interface IntakeIO {
 
   default void updateInputs(IntakeIOInputs inputs) {}
 
-  default void setVoltage(double volts) {}
+  default void setVoltage(double volts, boolean ignoreLimits) {}
 
   default void stop() {}
 }

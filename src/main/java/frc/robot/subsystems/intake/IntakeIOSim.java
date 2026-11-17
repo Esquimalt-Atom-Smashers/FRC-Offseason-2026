@@ -1,8 +1,10 @@
 package frc.robot.subsystems.intake;
 
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.math.system.plant.LinearSystemId;
 import edu.wpi.first.wpilibj.simulation.DCMotorSim;
+import frc.robot.Constants;
 
 import static frc.robot.subsystems.intake.IntakeConstants.*;
 
@@ -30,8 +32,11 @@ public class IntakeIOSim implements IntakeIO {
   } // End updateInputs
 
   @Override
-  public void setVoltage(double volts) {
-    appliedVolts = kMotorInverted ? -volts : volts;
+  public void setVoltage(double volts, boolean ignoreLimits) {
+    double clamped = ignoreLimits
+      ? MathUtil.clamp(volts, -Constants.kNominalVoltage, Constants.kNominalVoltage)
+      : MathUtil.clamp(volts, kMinVoltage, kMaxVoltage);
+    appliedVolts = kMotorInverted ? -clamped : clamped;
     isStopped = false;
   } // End setVoltage
 

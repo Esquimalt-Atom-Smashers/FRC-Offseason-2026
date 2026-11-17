@@ -25,6 +25,11 @@ public final class IntakeConstants {
   /* The time between each sim update. */
   public static final double kSimLoopPeriodSecs = 0.02;
 
+  /* The maximum voltage magnitude of the Intake motor */
+  public static final double kMaxVoltage = 8.0;
+  /* The minimum voltage magnitude of the Intake motor */
+  public static final double kMinVoltage = -kMaxVoltage;
+
   /* Voltage in idle state. */
   public static final double kIdleVoltage = 0.0;
   /* Voltage in intaking state. */
