@@ -3,10 +3,13 @@ package frc.robot.subsystems.intake;
 import com.revrobotics.spark.config.SparkBaseConfig;
 
 public final class IntakeConstants {
+  /* CAN ID of the intake motor */
   public static final int kMotorID = 0; // TODO: GET ID
 
+  /* Idle behaviour when motor power is 0 */
   public static final SparkBaseConfig.IdleMode kIdleMode = SparkBaseConfig.IdleMode.kCoast;
 
+  
   public static final boolean kMotorInverted = false;
 
   public static final int kSmartCurrentLimitAmps = 60;
@@ -17,6 +20,6 @@ public final class IntakeConstants {
   public static final int kEncoderVelocitySignalPeriodMs = 271;
 
   public static final double kIdleVoltage = 0.0;
-  public static final double kIntakingVoltage = 0.0;
+  public static final double kIntakingVoltage = 0.0; // TODO: find prefered intake voltage
   public static final double kOuttakingVoltage = -kIntakingVoltage;
 }

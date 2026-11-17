@@ -33,7 +33,6 @@ public class IntakeIOSparkMax implements IntakeIO {
       .primaryEncoderVelocityPeriodMs(kEncoderVelocitySignalPeriodMs);
     motor.configure(sparkMaxConfig, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
     motor.setPeriodicFrameTimeout(0);
-    // TODO: setup config
   }
 
   @Override
