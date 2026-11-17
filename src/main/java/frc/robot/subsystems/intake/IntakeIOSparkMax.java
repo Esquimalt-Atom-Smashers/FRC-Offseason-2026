@@ -33,22 +33,22 @@ public class IntakeIOSparkMax implements IntakeIO {
       .primaryEncoderVelocityPeriodMs(kEncoderVelocitySignalPeriodMs);
     motor.configure(sparkMaxConfig, ResetMode.kNoResetSafeParameters, PersistMode.kNoPersistParameters);
     motor.setPeriodicFrameTimeout(0);
-  }
+  } // End IntakeIoSparkMax Constructor
 
   @Override
   public void updateInputs(IntakeIOInputs inputs) {
     inputs.motorConnected = motor.getLastError() == REVLibError.kOk;
     inputs.appliedVolts = motor.getAppliedOutput() * motor.getBusVoltage();
     inputs.supplyCurrentAmps = motor.getOutputCurrent();
-  }
+  } // End updateInputs
 
   @Override
   public void setVoltage(double volts) {
     motor.set(volts);
-  }
+  } // end setVoltage
 
   @Override
   public void stop() {
     motor.set(0.0);
-  }
+  } // End stop
 }

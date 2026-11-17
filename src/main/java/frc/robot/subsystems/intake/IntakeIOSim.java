@@ -7,9 +7,6 @@ import edu.wpi.first.wpilibj.simulation.DCMotorSim;
 import static frc.robot.subsystems.intake.IntakeConstants.*;
 
 public class IntakeIOSim implements IntakeIO {
-  
-  private static final double kLoopPeriodSecs = 0.02;
-
   private final DCMotor simMotorModel = DCMotor.getNeo550(1);
   private final DCMotorSim simMotor = new DCMotorSim(LinearSystemId.createDCMotorSystem(simMotorModel, 0.0001, 1.0), simMotorModel);
   
@@ -25,21 +22,21 @@ public class IntakeIOSim implements IntakeIO {
       simMotor.setInputVoltage(appliedVolts);
     }
 
-    simMotor.update(kLoopPeriodSecs);
+    simMotor.update(kSimLoopPeriodSecs);
 
     inputs.motorConnected = true;
     inputs.appliedVolts = isStopped ? 0 : appliedVolts;
     inputs.supplyCurrentAmps = simMotor.getCurrentDrawAmps();
-  }
+  } // End updateInputs
 
   @Override
   public void setVoltage(double volts) {
     appliedVolts = kMotorInverted ? -volts : volts;
     isStopped = false;
-  }
+  } // End setVoltage
 
   @Override
   public void stop() {
     isStopped = true;
-  }
+  } // End stop
 }
