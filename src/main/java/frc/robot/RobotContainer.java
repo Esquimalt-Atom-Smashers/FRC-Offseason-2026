@@ -37,6 +37,10 @@ import frc.robot.simulation.FuelSim;
 import frc.robot.simulation.HubLightSimDisplay;
 import frc.robot.simulation.SimStartingPoseFullFieldSim;
 import frc.robot.simulation.SimStartingPoseUtil;
+import frc.robot.subsystems.agitator.Agitator;
+import frc.robot.subsystems.agitator.AgitatorIO;
+import frc.robot.subsystems.agitator.AgitatorIOSim;
+import frc.robot.subsystems.agitator.AgitatorIOSparkMax;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.GyroIO;
 import frc.robot.subsystems.drive.GyroIOPigeon2;
@@ -75,6 +79,7 @@ public class RobotContainer {
 	// Subsystems Toggle
 	private boolean isDriveEnabled  = true;
 	private boolean isVisionEnabled = true;
+	private boolean isAgitatorEnabled = true;
 
 	// Simulation Toggle
 	private boolean halfFuelOnly    = false;
@@ -84,6 +89,7 @@ public class RobotContainer {
 	private final Drive drive;
 	@SuppressWarnings("unused")
 	private final Vision vision;
+	private final Agitator agitator;
 
 	// Drive Commands
 	private final TeleopDrive teleopDrive;
@@ -146,6 +152,8 @@ public class RobotContainer {
 				} else {
 					vision = new Vision(drive, new VisionIO() {}, new VisionIO() {}, new VisionIO() {});
 				}
+				
+				agitator = isAgitatorEnabled ? new Agitator(new AgitatorIOSparkMax() {}) : new Agitator(new AgitatorIO() {});
 				break;
 
 			// Sim robot, instantiate physics sim IO implementations
@@ -177,6 +185,7 @@ public class RobotContainer {
 						new VisionIOPhotonVisionSim(camera1Name, robotToCamera1, driveSimulation::getSimulatedDriveTrainPose),
 						new VisionIOPhotonVisionSim(camera2Name, robotToCamera2, driveSimulation::getSimulatedDriveTrainPose));
 
+				agitator = new Agitator(new AgitatorIOSim() {});
 				// Fuel sim
 				if (fuelSimEnabled) {
 					registerFuelSimRobotBody(drive, driveSimulation);
@@ -192,6 +201,7 @@ public class RobotContainer {
 			default:
 				drive = new Drive(new GyroIO() {}, new ModuleIO() {}, new ModuleIO() {}, new ModuleIO() {}, new ModuleIO() {}, (pose) -> {});
 				vision = new Vision(drive, new VisionIO() {}, new VisionIO() {}, new VisionIO() {});
+				agitator = new Agitator( new AgitatorIO() {});
 				break;
 		}
 
@@ -256,6 +266,35 @@ public class RobotContainer {
 			}
 		}, drive));
 
+		// Sets the state to reversing if idle otherwise sets to idle
+		driverController.a().onTrue(Commands.runOnce(() -> {
+			switch (agitator.getState()) {
+				case IDLE:
+					agitator.setReversingState();
+					break;
+				case SHOOTING:
+				case REVERSING:
+				case MANUAL:
+				default:
+					agitator.setIdleState();
+					break;
+			}
+		}));
+		// Ditto, except it sets to shooting if idle
+		driverController.b().onTrue(Commands.runOnce(() -> {
+			switch (agitator.getState()) {
+				case IDLE:
+					agitator.setShootingState();
+					break;
+				case SHOOTING:
+				case REVERSING:
+				case MANUAL:
+				default:
+					agitator.setIdleState();
+					break;
+			}
+		}));
+		
 		// Start: toggle robot-centric drive, or reset the gyro while manual override is on
 		driverController.start().onTrue(
 				new ConditionalCommand(
@@ -320,6 +359,7 @@ public class RobotContainer {
 		if (drive != null) {
 			drive.stop();
 		}
+		if (agitator != null) agitator.setIdleState();
 	} // End idleAllSubsystems
 
 	/**
