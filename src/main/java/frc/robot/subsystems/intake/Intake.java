@@ -102,4 +102,10 @@ public class Intake extends SubsystemBase {
   public double getTargetVoltage() {
     return targetVoltage;
   } // End getTargetVoltage
+
+  /* Sets the intake's state to idle and stops the motor */
+  public void stop() {
+    setIdleState();
+    intakeIO.stop();
+  } // End stop
 }
