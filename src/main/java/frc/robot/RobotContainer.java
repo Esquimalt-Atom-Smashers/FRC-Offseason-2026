@@ -38,6 +38,7 @@ import frc.robot.simulation.HubLightSimDisplay;
 import frc.robot.simulation.SimStartingPoseFullFieldSim;
 import frc.robot.simulation.SimStartingPoseUtil;
 import frc.robot.subsystems.agitator.Agitator;
+import frc.robot.subsystems.agitator.AgitatorConstants;
 import frc.robot.subsystems.agitator.AgitatorIO;
 import frc.robot.subsystems.agitator.AgitatorIOSim;
 import frc.robot.subsystems.agitator.AgitatorIOSparkMax;
@@ -293,6 +294,14 @@ public class RobotContainer {
 					agitator.setIdleState();
 					break;
 			}
+		}));
+
+		driverController.povUp().onTrue(Commands.runOnce(() -> {
+			agitator.stepVoltage(AgitatorConstants.kStepVolts);
+		}));
+		
+		driverController.povDown().onTrue(Commands.runOnce(() -> {
+			agitator.stepVoltage(-AgitatorConstants.kStepVolts);
 		}));
 		
 		// Start: toggle robot-centric drive, or reset the gyro while manual override is on

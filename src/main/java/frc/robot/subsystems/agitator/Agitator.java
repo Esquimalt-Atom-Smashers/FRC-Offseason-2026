@@ -16,6 +16,8 @@ import org.littletonrobotics.junction.Logger;
 
 
  public class Agitator extends SubsystemBase{
+  private static final String kTargetVoltageKey = "Agitator/TargetVoltage";
+  private static final double kTargetVoltageWidgetEpsilon = 1e-3;
 
   // All possible states: Shooting, Reversing, Idle, or Manual
   public enum State {
@@ -33,6 +35,7 @@ import org.littletonrobotics.junction.Logger;
   private State state = State.IDLE;
   private double targetVoltage = kIdleVoltage;
   private BooleanSupplier ignoreLimitSupplier = () -> false;
+  private double lastTargetVoltageDashboardWrite = Double.NaN;
   
   public Agitator(AgitatorIO io) {
     this(io, "");
@@ -46,10 +49,36 @@ import org.littletonrobotics.junction.Logger;
   public void periodic() {
   agitatorIO.updateInputs(agitatorInputs);
   
+  Logger.recordOutput(logRoot + "Subsystems/Agitator/Inputs/MotorConnected", agitatorInputs.motorConnected);
+  Logger.recordOutput(logRoot + "Subsystems/Agitator/Inputs/AppliedVolts", TelemetryUtil.roundToTwoDecimals(agitatorInputs.appliedVolts));
+  Logger.recordOutput(logRoot + "Subsystems/Agitator/Inputs/SupplyCurrentAmps", TelemetryUtil.roundToTwoDecimals(agitatorInputs.supplyCurrentAmps));
+  Logger.recordOutput(logRoot + "Subsystems/Agitator/TargetVolts", TelemetryUtil.roundToTwoDecimals(getTargetVoltage()));
+  Logger.recordOutput(logRoot + "Subsystems/Agitator/State", state.name());
  
   if (DriverStation.isDisabled()) {
     agitatorIO.stop();
+    lastTargetVoltageDashboardWrite = Double.NaN;
+    return;
   }
+
+  boolean useSmartDashboardTarget = ignoreLimitSupplier.getAsBoolean();
+  
+  if (useSmartDashboardTarget) {
+    double dashboardVolts = SmartDashboard.getNumber(kTargetVoltageKey, targetVoltage);
+    boolean dashboardTargetEdited = 
+      !Double.isNaN(lastTargetVoltageDashboardWrite)
+        && Math.abs(dashboardVolts - lastTargetVoltageDashboardWrite) > kTargetVoltageWidgetEpsilon;
+    if (dashboardTargetEdited) {
+      setTargetVoltage(dashboardVolts);
+      if(state == State.IDLE) {
+        state = State.MANUAL;
+      }
+    }
+  }
+  targetVoltage = TelemetryUtil.roundToTwoDecimals(targetVoltage);
+  SmartDashboard.putNumber(kTargetVoltageKey, targetVoltage);
+  lastTargetVoltageDashboardWrite = targetVoltage;
+
   switch (state) {
 
     case IDLE:
