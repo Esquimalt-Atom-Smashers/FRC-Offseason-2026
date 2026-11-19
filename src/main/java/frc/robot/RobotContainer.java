@@ -55,6 +55,7 @@ import frc.robot.subsystems.intake.IntakeIOSim;
 import frc.robot.subsystems.intake.IntakeConstants;
 
 import static edu.wpi.first.units.Units.Meters;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import static frc.robot.subsystems.vision.VisionConstants.camera0Name;
 import static frc.robot.subsystems.vision.VisionConstants.camera1Name;
 import static frc.robot.subsystems.vision.VisionConstants.camera2Name;
@@ -228,6 +229,12 @@ public class RobotContainer {
 		teleopDrive.setManualOverrideSupplier(() -> driverManualOverride);
 
 		/// -------------------------------------------------------------------------------------------
+		/// ------------------------------- Subsystem Commands ----------------------------------------
+		/// -------------------------------------------------------------------------------------------
+		// Ignore limits suppliers
+		intake.setIgnoreLimitsSupplier(() -> false); // TODO: update to operator manual override
+
+		/// -------------------------------------------------------------------------------------------
 		/// ------------------------------------ Logger Dashboard -------------------------------------
 		/// -------------------------------------------------------------------------------------------
 		// Field view
@@ -263,6 +270,13 @@ public class RobotContainer {
 				Constants.currentMode == Constants.Mode.SIM
 						? () -> drive.setPose(driveSimulation.getSimulatedDriveTrainPose())
 						: () -> drive.setPose(new Pose2d(drive.getPose().getTranslation(), new Rotation2d()));
+
+		driverController.back().onTrue(
+			new ConditionalCommand(
+				Commands.runOnce(() -> driverManualOverride = true), 
+				Commands.runOnce(() -> driverManualOverride = false), 
+				() -> driverManualOverride == false)
+		);
 
 		// Toggle face-target mode when Y is pressed
 		driverController.y().onTrue(Commands.runOnce(() -> {
@@ -302,11 +316,17 @@ public class RobotContainer {
 		);
 
 		driverController.povUp().onTrue(
-			Commands.runOnce(() -> intake.stepVoltage(IntakeConstants.kStepVoltage))
+			new ConditionalCommand(
+				Commands.runOnce(() -> intake.stepVoltage(IntakeConstants.kStepVoltage)),
+				new InstantCommand(),
+			  () -> driverManualOverride)
 		);
 		
 		driverController.povDown().onTrue(
-			Commands.runOnce(() -> intake.stepVoltage(-IntakeConstants.kStepVoltage))
+			new ConditionalCommand(
+				Commands.runOnce(() -> intake.stepVoltage(-IntakeConstants.kStepVoltage)),
+				new InstantCommand(),
+			  () -> driverManualOverride)
 		);
 	} // End configureDriverBindings
 
