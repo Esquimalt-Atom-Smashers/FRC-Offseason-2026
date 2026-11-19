@@ -271,7 +271,7 @@ public class RobotContainer {
 						? () -> drive.setPose(driveSimulation.getSimulatedDriveTrainPose())
 						: () -> drive.setPose(new Pose2d(drive.getPose().getTranslation(), new Rotation2d()));
 
-		driverController.back().onTrue(
+		driverController.x().onTrue(
 			new ConditionalCommand(
 				Commands.runOnce(() -> driverManualOverride = true), 
 				Commands.runOnce(() -> driverManualOverride = false), 
