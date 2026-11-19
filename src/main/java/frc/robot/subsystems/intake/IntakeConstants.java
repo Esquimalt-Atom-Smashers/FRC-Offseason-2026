@@ -36,4 +36,6 @@ public final class IntakeConstants {
   public static final double kIntakingVoltage = 8.0;
   /* Voltage in outtaking state. */
   public static final double kOuttakingVoltage = -kIntakingVoltage;
+  /* Default voltage to step */
+  public static final double kStepVoltage = 0.25;
 }

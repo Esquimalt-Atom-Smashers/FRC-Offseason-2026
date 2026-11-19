@@ -39,7 +39,7 @@ public class IntakeIOSim implements IntakeIO {
     appliedVolts = kMotorInverted ? -clamped : clamped;
     isStopped = false;
   } // End setVoltage
-
+  
   @Override
   public void stop() {
     isStopped = true;

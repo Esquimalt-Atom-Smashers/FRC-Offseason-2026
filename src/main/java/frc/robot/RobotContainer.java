@@ -52,6 +52,7 @@ import frc.robot.subsystems.intake.Intake;
 import frc.robot.subsystems.intake.IntakeIO;
 import frc.robot.subsystems.intake.IntakeIOSparkMax;
 import frc.robot.subsystems.intake.IntakeIOSim;
+import frc.robot.subsystems.intake.IntakeConstants;
 
 import static edu.wpi.first.units.Units.Meters;
 import static frc.robot.subsystems.vision.VisionConstants.camera0Name;
@@ -298,6 +299,14 @@ public class RobotContainer {
 				Commands.runOnce(() -> intake.setOuttakingState()), 
 				Commands.runOnce(() -> intake.setIdleState()), 
 				() -> intake.getState() == Intake.State.IDLE)
+		);
+
+		driverController.povUp().onTrue(
+			Commands.runOnce(() -> intake.stepVoltage(IntakeConstants.kStepVoltage))
+		);
+		
+		driverController.povDown().onTrue(
+			Commands.runOnce(() -> intake.stepVoltage(-IntakeConstants.kStepVoltage))
 		);
 	} // End configureDriverBindings
 

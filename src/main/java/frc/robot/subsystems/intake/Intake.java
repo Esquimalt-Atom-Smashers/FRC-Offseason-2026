@@ -4,6 +4,8 @@ import static frc.robot.subsystems.intake.IntakeConstants.kIdleVoltage;
 import static frc.robot.subsystems.intake.IntakeConstants.kIntakingVoltage;
 import static frc.robot.subsystems.intake.IntakeConstants.kOuttakingVoltage;
 
+import java.util.function.BooleanSupplier;
+
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.util.TelemetryUtil;
@@ -22,6 +24,7 @@ public class Intake extends SubsystemBase {
 
   private State state = State.IDLE;
   private double targetVoltage = TelemetryUtil.roundToTwoDecimals(kIdleVoltage);
+  private BooleanSupplier ignoreLimitsSupplier = () -> false;
 
   private final IntakeIO intakeIO;
   private final IntakeIO.IntakeIOInputs intakeIOInputs = new IntakeIO.IntakeIOInputs();
@@ -53,7 +56,7 @@ public class Intake extends SubsystemBase {
       case INTAKING:
       case OUTTAKING:
       case MANUAL:
-        intakeIO.setVoltage(targetVoltage, false);
+        intakeIO.setVoltage(targetVoltage, ignoreLimitsSupplier.getAsBoolean());
         break;
       default:
         intakeIO.stop();
@@ -88,6 +91,11 @@ public class Intake extends SubsystemBase {
     setTargetVoltage(kOuttakingVoltage);
   } // End setOuttakingState
 
+  /* Set the state to manual (Custom controls) */
+  public void setManualState() {
+    state = State.MANUAL;
+  } // End setManualState
+  
   /* Returns the current state */
   public State getState() {
     return state;
@@ -102,6 +110,20 @@ public class Intake extends SubsystemBase {
   public double getTargetVoltage() {
     return targetVoltage;
   } // End getTargetVoltage
+
+  /* Set supplier for ignoring limits */
+  public void setIgnoreLimitsSupplier(BooleanSupplier supplier) {
+    ignoreLimitsSupplier = supplier != null ? supplier : () -> false;
+  } // End setIgnoreLimitsSupplier
+
+  /* Steps the target voltage of the motor by the inputted variable */
+  public void stepVoltage(double stepVolts) {
+    setTargetVoltage(targetVoltage + stepVolts);
+
+    if (Math.abs(getTargetVoltage()) - kIdleVoltage < 1e-6) {
+      setIdleState();
+    }
+  } // End stepVoltage
 
   /* Sets the intake's state to idle and stops the motor */
   public void stop() {
