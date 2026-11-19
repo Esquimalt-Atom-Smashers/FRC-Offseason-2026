@@ -48,6 +48,10 @@ import frc.robot.subsystems.vision.Vision;
 import frc.robot.subsystems.vision.VisionIO;
 import frc.robot.subsystems.vision.VisionIOPhotonVision;
 import frc.robot.subsystems.vision.VisionIOPhotonVisionSim;
+import frc.robot.subsystems.intake.Intake;
+import frc.robot.subsystems.intake.IntakeIO;
+import frc.robot.subsystems.intake.IntakeIOSparkMax;
+import frc.robot.subsystems.intake.IntakeIOSim;
 
 import static edu.wpi.first.units.Units.Meters;
 import static frc.robot.subsystems.vision.VisionConstants.camera0Name;
@@ -74,6 +78,7 @@ public class RobotContainer {
 
 	// Subsystems Toggle
 	private boolean isDriveEnabled  = true;
+	private boolean isIntakeEnabled = true;
 	private boolean isVisionEnabled = true;
 
 	// Simulation Toggle
@@ -82,6 +87,7 @@ public class RobotContainer {
 
 	// Subsystems
 	private final Drive drive;
+	private final Intake intake;
 	@SuppressWarnings("unused")
 	private final Vision vision;
 
@@ -137,6 +143,13 @@ public class RobotContainer {
 					drive = new Drive(new GyroIO() {}, new ModuleIO() {}, new ModuleIO() {}, new ModuleIO() {}, new ModuleIO() {}, (pose) -> {});
 				}
 
+				// Initialize Intake subsystem
+				if (isIntakeEnabled) {
+					intake = new Intake(new IntakeIOSparkMax());
+				} else {
+					intake = new Intake(new IntakeIO() {});
+				}
+
 				// Initialize Vision after Drive (Vision needs the Drive reference)
 				if (isVisionEnabled) {
 					vision = new Vision(drive,
@@ -171,6 +184,8 @@ public class RobotContainer {
 						new ModuleIOSim(TunerConstants.BackRight, driveSimulation.getModules()[3], 3),
 						driveSimulation::setSimulationWorldPose);
 
+				intake = new Intake(new IntakeIOSim());
+
 				// Initialize Vision after Drive (Vision needs the Drive reference)
 				vision = new Vision(drive,
 						new VisionIOPhotonVisionSim(camera0Name, robotToCamera0, driveSimulation::getSimulatedDriveTrainPose),
@@ -191,6 +206,7 @@ public class RobotContainer {
 			// Replayed robot, disable IO implementations
 			default:
 				drive = new Drive(new GyroIO() {}, new ModuleIO() {}, new ModuleIO() {}, new ModuleIO() {}, new ModuleIO() {}, (pose) -> {});
+				intake = new Intake(new IntakeIO() {});
 				vision = new Vision(drive, new VisionIO() {}, new VisionIO() {}, new VisionIO() {});
 				break;
 		}
@@ -269,6 +285,20 @@ public class RobotContainer {
 						Commands.runOnce(() -> driverManualOverride = false),
 						Commands.runOnce(() -> driverManualOverride = true),
 						() -> driverManualOverride));
+
+		driverController.a().onTrue(
+			new ConditionalCommand(
+				Commands.runOnce(() -> intake.setIntakingState()), 
+				Commands.runOnce(() -> intake.setIdleState()), 
+				() -> intake.getState() == Intake.State.IDLE)
+		);
+
+		driverController.b().onTrue(
+			new ConditionalCommand(
+				Commands.runOnce(() -> intake.setOuttakingState()), 
+				Commands.runOnce(() -> intake.setIdleState()), 
+				() -> intake.getState() == Intake.State.IDLE)
+		);
 	} // End configureDriverBindings
 
 	/**
@@ -319,6 +349,9 @@ public class RobotContainer {
 	public void idleAllSubsystems() {
 		if (drive != null) {
 			drive.stop();
+		}
+		if (intake != null) {
+			//intake.idle();
 		}
 	} // End idleAllSubsystems
 
